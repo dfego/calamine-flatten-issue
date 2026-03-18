@@ -57,4 +57,20 @@ mod tests {
         let rows: Result<Vec<_>, _> = range_iter.collect();
         rows.unwrap();
     }
+
+    #[test]
+    fn row_csv() {
+        let mut reader = csv::Reader::from_path("test.csv").unwrap();
+        let iter = reader.deserialize::<Row>();
+        let rows: Result<Vec<_>, _> = iter.collect();
+        rows.unwrap();
+    }
+
+    #[test]
+    fn explicit_row_csv() {
+        let mut reader = csv::Reader::from_path("test.csv").unwrap();
+        let iter = reader.deserialize::<ExplicitRow>();
+        let rows: Result<Vec<_>, _> = iter.collect();
+        rows.unwrap();
+    }
 }
